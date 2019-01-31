@@ -21,15 +21,19 @@
 package cmd // import "github.com/MarkusFreitag/changelogger/cmd"
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/MarkusFreitag/changelogger/pkg/editor"
 	"github.com/MarkusFreitag/changelogger/pkg/gitconfig"
 	"github.com/MarkusFreitag/changelogger/pkg/parser"
 	"github.com/MarkusFreitag/changelogger/pkg/stringutil"
+	"github.com/blang/semver"
+	"github.com/rhysd/go-github-selfupdate/selfupdate"
 	"github.com/spf13/cobra"
 )
 
@@ -45,6 +49,32 @@ func handleError(err error) {
 var rootCmd = &cobra.Command{
 	Use:   "changelogger",
 	Short: "Create and update changelogs with ease",
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		if stat, err := os.Stat("/tmp/changelogger.update"); err == nil {
+			if time.Since(stat.ModTime()) > 24*time.Hour {
+				err = os.Remove("/tmp/changelogger.update")
+				handleError(err)
+			} else {
+				return
+			}
+		}
+
+		//TODO use Masterminds/semver instead of blang/semver
+		latest, found, err := selfupdate.DetectLatest("MarkusFreitag/changelogger")
+		handleError(err)
+		if !found {
+			handleError(errors.New("github.com/MarkusFreitag/changelogger does not have any releases"))
+		}
+		current, err := semver.Parse(BuildVersion)
+		handleError(err)
+		if !latest.Version.LTE(current) {
+			fmt.Println("New version available, run `changelogger update`!")
+			fmt.Println(latest.ReleaseNotes)
+
+			_, err = os.OpenFile("/tmp/changelogger.update", os.O_RDONLY|os.O_CREATE, 0666)
+			handleError(err)
+		}
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		var err error
 		rels := make(parser.Releases, 0)
