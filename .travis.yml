@@ -14,7 +14,7 @@ env:
 script:
   - curl -s https://taskfile.org/install.sh | sh
   - curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.13.2
-  - task ci
+  - ./bin/task ci
 
 deploy:
   - provider: script
