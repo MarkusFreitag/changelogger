@@ -35,30 +35,38 @@ var (
 	force bool
 )
 
+func updateChecker() (*selfupdate.Release, error) {
+	latest, found, err := selfupdate.DetectLatest("MarkusFreitag/changelogger")
+	if err != nil {
+		return nil, err
+	}
+
+	if !found {
+		return nil, errors.New("github.com/MarkusFreitag/changelogger does not have any releases")
+	}
+
+	current, err := semver.Parse(BuildVersion)
+	if err != nil {
+		return nil, err
+	}
+
+	if latest.Version.LTE(current) {
+		return nil, nil
+	}
+	return latest, nil
+}
+
 var updateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Update to the latest version",
 	Run: func(cmd *cobra.Command, args []string) {
-		//TODO use Masterminds/semver instead of blang/semver
-		latest, found, err := selfupdate.DetectLatest("MarkusFreitag/changelogger")
+		latest, err := updateChecker()
 		handleError(err)
-
-		if !found {
-			handleError(errors.New("github.com/MarkusFreitag/changelogger does not have any releases"))
-		}
-
-		current, err := semver.Parse(BuildVersion)
-		handleError(err)
-
-		if latest.Version.LTE(current) {
-			fmt.Println("Current version is the latest")
-			return
-		}
 
 		if !force {
 			var confirm bool
 			prompt := &survey.Confirm{
-				Message: fmt.Sprintf("%s => %s Continue?", current.String(), latest.Version.String()),
+				Message: fmt.Sprintf("%s => %s Continue?", BuildVersion, latest.Version.String()),
 			}
 			err = survey.AskOne(prompt, &confirm, nil)
 			handleError(err)

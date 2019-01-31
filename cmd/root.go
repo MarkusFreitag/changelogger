@@ -21,7 +21,6 @@
 package cmd // import "github.com/MarkusFreitag/changelogger/cmd"
 
 import (
-	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -32,8 +31,6 @@ import (
 	"github.com/MarkusFreitag/changelogger/pkg/gitconfig"
 	"github.com/MarkusFreitag/changelogger/pkg/parser"
 	"github.com/MarkusFreitag/changelogger/pkg/stringutil"
-	"github.com/blang/semver"
-	"github.com/rhysd/go-github-selfupdate/selfupdate"
 	"github.com/spf13/cobra"
 )
 
@@ -59,15 +56,9 @@ var rootCmd = &cobra.Command{
 			}
 		}
 
-		//TODO use Masterminds/semver instead of blang/semver
-		latest, found, err := selfupdate.DetectLatest("MarkusFreitag/changelogger")
+		latest, err := updateChecker()
 		handleError(err)
-		if !found {
-			handleError(errors.New("github.com/MarkusFreitag/changelogger does not have any releases"))
-		}
-		current, err := semver.Parse(BuildVersion)
-		handleError(err)
-		if !latest.Version.LTE(current) {
+		if latest != nil {
 			fmt.Println("New version available, run `changelogger update`!")
 			fmt.Println(latest.ReleaseNotes)
 
