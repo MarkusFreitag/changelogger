@@ -46,6 +46,20 @@ tasks:
         sh: date -Iseconds
       VERSION:
         sh: git describe --tags || git describe --always
+  changelog:
+    desc: Add a new changelog entry
+    cmds:
+      - ish: changelogger
+  release:
+    desc: Create a new release
+    cmds:
+      - ish: changelogger release new
+        ignore_error: yes
+      - git add CHANGELOG.md
+      - git commit -m "Bump version to $(changelogger release last --version-only)" -m "$(changelogger release last)"
+      #- git push
+    env:
+      CHANGELOGGER_VERSION_FORMAT: semver
   go-get:
     cmds:
       - go get -u {{.REPO}}
