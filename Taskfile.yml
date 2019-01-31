@@ -3,7 +3,7 @@ output: 'prefixed'
 
 vars:
   CGO_ENABLED: 0
-  PATH: 'github.com/changelogger'
+  PATH: 'github.com/MarkusFreitag/changelogger'
   BINARY_NAME: 'changelogger'
 
 tasks:
