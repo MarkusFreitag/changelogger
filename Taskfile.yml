@@ -61,7 +61,7 @@ tasks:
   generate-install-script:
     desc: Generate install script using https://github.com/goreleaser/godownloader
     cmds:
-      - godownloader --repo MarkusFreitag/go-changelogger -o install-changelogger.sh
+      - godownloader --repo MarkusFreitag/changelogger -o install-changelogger.sh
       - cp ./install-changelogger.sh ./docs/install.sh
   ci:
     desc: Run ci tasks
