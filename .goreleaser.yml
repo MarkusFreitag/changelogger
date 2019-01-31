@@ -4,8 +4,8 @@ build:
   ldflags:
     - >
       -s -w 
-      -X main.BuildVersion={{.Version}} 
-      -X main.BuildDate={{.Date}} 
+      -X cmd.BuildVersion={{.Version}}
+      -X cmd.BuildDate={{.Date}}
   goos:
     - linux
   goarch:
