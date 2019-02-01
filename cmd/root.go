@@ -25,6 +25,7 @@ import (
 	"io"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/MarkusFreitag/changelogger/pkg/editor"
 	"github.com/MarkusFreitag/changelogger/pkg/gitconfig"
@@ -45,6 +46,26 @@ func handleError(err error) {
 var rootCmd = &cobra.Command{
 	Use:   "changelogger",
 	Short: "Create and update changelogs with ease",
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		if stat, err := os.Stat("/tmp/changelogger.update"); err == nil {
+			if time.Since(stat.ModTime()) > 24*time.Hour {
+				err = os.Remove("/tmp/changelogger.update")
+				handleError(err)
+			} else {
+				return
+			}
+		}
+
+		latest, err := updateChecker()
+		handleError(err)
+		if latest != nil {
+			fmt.Println("New version available, run `changelogger update`!")
+			fmt.Println(latest.ReleaseNotes)
+
+			_, err = os.OpenFile("/tmp/changelogger.update", os.O_RDONLY|os.O_CREATE, 0666)
+			handleError(err)
+		}
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		var err error
 		rels := make(parser.Releases, 0)

@@ -10,6 +10,7 @@ require (
 	github.com/Shopify/sarama v1.20.1 // indirect
 	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
 	github.com/aws/aws-sdk-go v1.16.26 // indirect
+	github.com/blang/semver v3.5.1+incompatible
 	github.com/coreos/etcd v3.3.11+incompatible // indirect
 	github.com/coreos/go-systemd v0.0.0-20181031085051-9002847aa142 // indirect
 	github.com/go-critic/go-critic v0.3.4 // indirect
@@ -51,6 +52,7 @@ require (
 	github.com/prometheus/client_model v0.0.0-20190129233127-fd36f4220a90 // indirect
 	github.com/prometheus/common v0.2.0 // indirect
 	github.com/prometheus/procfs v0.0.0-20190129233650-316cf8ccfec5 // indirect
+	github.com/rhysd/go-github-selfupdate v1.1.0
 	github.com/russross/blackfriday v2.0.0+incompatible // indirect
 	github.com/shirou/gopsutil v2.18.12+incompatible // indirect
 	github.com/shurcooL/go v0.0.0-20190121191506-3fef8c783dec // indirect
