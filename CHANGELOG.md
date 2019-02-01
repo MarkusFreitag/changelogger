@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * Bugfix for the update checking routine
+
+*Not released yet*
+
 # Minor Release v0.2.0 (2019-02-01)
   * **Markus Freitag**
     * Implement update routine
