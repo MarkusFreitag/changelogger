@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * Do not exit program when update check fails
+
+*Not released yet*
+
 # Patch Release v0.2.1 (2019-02-01)
   * **Markus Freitag**
     * Bugfix for the update checking routine
