@@ -39,6 +39,7 @@ require (
 	github.com/gorilla/mux v1.7.0 // indirect
 	github.com/gregjones/httpcache v0.0.0-20181110185634-c63ab54fda8f // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.7.0 // indirect
+	github.com/hokaccha/go-prettyjson v0.0.0-20180920040306-f579f869bbfe
 	github.com/imdario/mergo v0.3.7 // indirect
 	github.com/kamilsk/retry v0.0.0-20190129190859-56e8dbb8622b // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51
