@@ -1,8 +1,8 @@
-# For next release
+# Patch Release v0.2.1 (2019-02-01)
   * **Markus Freitag**
     * Bugfix for the update checking routine
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Minor Release v0.2.0 (2019-02-01)
   * **Markus Freitag**
