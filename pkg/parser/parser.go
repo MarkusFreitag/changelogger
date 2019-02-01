@@ -2,6 +2,7 @@ package parser // import "github.com/MarkusFreitag/changelogger/pkg/parser"
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"os"
 	"regexp"
@@ -89,6 +90,43 @@ func NewRelease() *Release {
 		Footer:  "*Not released yet*",
 		Changes: make(Changes),
 	}
+}
+
+func (r *Release) MarshalJSON() ([]byte, error) {
+	type version struct {
+		Major int64  `json:"major"`
+		Minor int64  `json:"minor"`
+		Patch int64  `json:"patch"`
+		Ext   string `json:"ext"`
+		Full  string `json:"full"`
+	}
+	rel := &struct {
+		Header   string  `json:"header"`
+		Footer   string  `json:"footer"`
+		Version  version `json:"version"`
+		Date     string  `json:"date"`
+		Changes  Changes `json:"changes"`
+		By       Author  `json:"by"`
+		Released bool    `json:"released"`
+	}{
+		Header:   r.Header,
+		Footer:   r.Footer,
+		Changes:  r.Changes,
+		By:       r.By,
+		Released: r.Released,
+	}
+
+	if r.Released {
+		rel.Version = version{
+			Major: r.Version.Major(),
+			Minor: r.Version.Minor(),
+			Patch: r.Version.Patch(),
+			Ext:   r.Version.Prerelease(),
+			Full:  r.Version.String(),
+		}
+		rel.Date = r.Date.Format("2006-01-02")
+	}
+	return json.Marshal(rel)
 }
 
 func (r *Release) GenerateHeader(bump string) {
