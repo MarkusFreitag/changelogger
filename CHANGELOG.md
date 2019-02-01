@@ -1,4 +1,4 @@
-# For next release
+# Minor Release v0.2.0 (2019-02-01)
   * **Markus Freitag**
     * Implement update routine
       * automatic update checker in the init phase
@@ -6,7 +6,7 @@
     * Implement `json` command
     * Add prerun check for minimal version
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Minor Release v0.1.0 (2019-01-31)
   * **Markus Freitag**
