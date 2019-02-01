@@ -21,7 +21,6 @@
 package cmd
 
 import (
-	"errors"
 	"fmt"
 	"os"
 
@@ -31,18 +30,20 @@ import (
 	"gopkg.in/AlecAivazis/survey.v1"
 )
 
+const REPO = "MarkusFreitag/changelogger"
+
 var (
 	force bool
 )
 
 func updateChecker() (*selfupdate.Release, error) {
-	latest, found, err := selfupdate.DetectLatest("MarkusFreitag/changelogger")
+	latest, found, err := selfupdate.DetectLatest(REPO)
 	if err != nil {
 		return nil, err
 	}
 
 	if !found {
-		return nil, errors.New("github.com/MarkusFreitag/changelogger does not have any releases")
+		return nil, fmt.Errorf("%s does not have any releases", REPO)
 	}
 
 	current, err := semver.ParseTolerant(BuildVersion)

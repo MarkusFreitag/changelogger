@@ -64,20 +64,29 @@ var rootCmd = &cobra.Command{
 		if stat, err := os.Stat("/tmp/changelogger.update"); err == nil {
 			if time.Since(stat.ModTime()) > 24*time.Hour {
 				err = os.Remove("/tmp/changelogger.update")
-				handleError(err)
+				if err != nil {
+					fmt.Printf("Checking for updates failed: %s\n", err.Error())
+					return
+				}
 			} else {
 				return
 			}
 		}
 
 		latest, err := updateChecker()
-		handleError(err)
+		if err != nil {
+			fmt.Printf("Checking for updates failed: %s\n", err.Error())
+			return
+		}
 		if latest != nil {
 			fmt.Println("New version available, run `changelogger update`!")
 			fmt.Println(latest.ReleaseNotes)
 
 			_, err = os.OpenFile("/tmp/changelogger.update", os.O_RDONLY|os.O_CREATE, 0666)
-			handleError(err)
+			if err != nil {
+				fmt.Printf("Checking for updates failed: %s\n", err.Error())
+				return
+			}
 		}
 	},
 	Run: func(cmd *cobra.Command, args []string) {
