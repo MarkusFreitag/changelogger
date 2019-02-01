@@ -31,6 +31,7 @@ import (
 	"github.com/MarkusFreitag/changelogger/pkg/gitconfig"
 	"github.com/MarkusFreitag/changelogger/pkg/parser"
 	"github.com/MarkusFreitag/changelogger/pkg/stringutil"
+	"github.com/Masterminds/semver"
 	"github.com/spf13/cobra"
 )
 
@@ -47,6 +48,19 @@ var rootCmd = &cobra.Command{
 	Use:   "changelogger",
 	Short: "Create and update changelogs with ease",
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+		if val, ok := os.LookupEnv("CHANGELOGGER_MIN_VERSION"); ok {
+			minVersion, err := semver.NewVersion(val)
+			handleError(err)
+			bVersion, err := semver.NewVersion(BuildVersion)
+			handleError(err)
+			if bVersion.LessThan(minVersion) {
+				fmt.Printf("Your current version: %s\n", bVersion.String())
+				fmt.Printf("Required version: %s\n", minVersion.String())
+				fmt.Println("Run `changelogger update`")
+				os.Exit(1)
+			}
+		}
+
 		if stat, err := os.Stat("/tmp/changelogger.update"); err == nil {
 			if time.Since(stat.ModTime()) > 24*time.Hour {
 				err = os.Remove("/tmp/changelogger.update")
