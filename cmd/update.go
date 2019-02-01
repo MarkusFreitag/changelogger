@@ -45,7 +45,7 @@ func updateChecker() (*selfupdate.Release, error) {
 		return nil, errors.New("github.com/MarkusFreitag/changelogger does not have any releases")
 	}
 
-	current, err := semver.Parse(BuildVersion)
+	current, err := semver.ParseTolerant(BuildVersion)
 	if err != nil {
 		return nil, err
 	}
@@ -62,6 +62,10 @@ var updateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		latest, err := updateChecker()
 		handleError(err)
+		if latest == nil {
+			fmt.Println("Already up to date")
+			return
+		}
 
 		if !force {
 			var confirm bool
