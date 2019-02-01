@@ -1,8 +1,8 @@
-# For next release
+# Patch Release v0.2.2 (2019-02-01)
   * **Markus Freitag**
     * Do not exit program when update check fails
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.2.1 (2019-02-01)
   * **Markus Freitag**
