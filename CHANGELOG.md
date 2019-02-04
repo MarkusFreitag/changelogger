@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * Enable syntax highlighting in editor
+
+*Not released yet*
+
 # Patch Release v0.2.2 (2019-02-01)
   * **Markus Freitag**
     * Do not exit program when update check fails
