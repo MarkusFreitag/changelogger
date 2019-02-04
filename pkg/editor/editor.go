@@ -21,7 +21,7 @@ func Open(initialValue *string) error {
 		return errors.New("set EDITOR or VISUAL variable")
 	}
 
-	file, err := ioutil.TempFile("", "changelogger")
+	file, err := ioutil.TempFile("", "changelogger*.md")
 	if err != nil {
 		return err
 	}
