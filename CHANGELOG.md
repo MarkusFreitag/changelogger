@@ -1,9 +1,9 @@
-# For next release
+# Patch Release v0.2.3 (2019-02-12)
   * **Markus Freitag**
     * Enable syntax highlighting in editor
     * Run update check just every 24h
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.2.2 (2019-02-01)
   * **Markus Freitag**
