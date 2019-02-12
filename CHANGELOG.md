@@ -1,6 +1,7 @@
 # For next release
   * **Markus Freitag**
     * Enable syntax highlighting in editor
+    * Run update check just every 24h
 
 *Not released yet*
 
