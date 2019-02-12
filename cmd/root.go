@@ -81,12 +81,11 @@ var rootCmd = &cobra.Command{
 		if latest != nil {
 			fmt.Println("New version available, run `changelogger update`!")
 			fmt.Println(latest.ReleaseNotes)
-
-			_, err = os.OpenFile("/tmp/changelogger.update", os.O_RDONLY|os.O_CREATE, 0666)
-			if err != nil {
-				fmt.Printf("Checking for updates failed: %s\n", err.Error())
-				return
-			}
+		}
+		_, err = os.OpenFile("/tmp/changelogger.update", os.O_RDONLY|os.O_CREATE, 0666)
+		if err != nil {
+			fmt.Printf("Checking for updates failed: %s\n", err.Error())
+			return
 		}
 	},
 	Run: func(cmd *cobra.Command, args []string) {
