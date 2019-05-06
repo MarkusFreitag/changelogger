@@ -15,7 +15,6 @@ require (
 	github.com/coreos/go-systemd v0.0.0-20181031085051-9002847aa142 // indirect
 	github.com/go-critic/go-critic v0.3.4 // indirect
 	github.com/go-logfmt/logfmt v0.4.0 // indirect
-	github.com/go-ole/go-ole v1.2.2 // indirect
 	github.com/go-toolsmith/astcast v1.0.0 // indirect
 	github.com/go-toolsmith/astcopy v1.0.0 // indirect
 	github.com/go-toolsmith/astfmt v1.0.0 // indirect
