@@ -4,8 +4,10 @@ Changelogger is a CLI tool for maintaining changelog files and version releases.
 
 ## Installation
 
-To install it, you can download the [binary](https://github.com/MarkusFreitag/changelogger/releases/latest/download/changelogger_linux_amd64.deb), [deb](https://github.com/MarkusFreitag/changelogger/releases/latest/download/changelogger_linux_amd64.rpm) or [rpm](https://github.com/MarkusFreitag/changelogger/releases/latest/download/changelogger_linux_amd64.tar.gz) package from the releases.
-
+To install it, you can either use the following one-liner or download the [binary](https://github.com/MarkusFreitag/changelogger/releases/latest/download/changelogger_linux_amd64.deb), [deb](https://github.com/MarkusFreitag/changelogger/releases/latest/download/changelogger_linux_amd64.rpm) or [rpm](https://github.com/MarkusFreitag/changelogger/releases/latest/download/changelogger_linux_amd64.tar.gz) package from the releases.
+```bash
+curl -Ls https://git.io/changelogger.sh | sh
+```
 
 When you using it, every 24h, it checks whether new updates are available. If so, it can be updated using its `update` command.
 ```bash
