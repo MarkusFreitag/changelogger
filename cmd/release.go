@@ -36,7 +36,7 @@ import (
 	"gopkg.in/AlecAivazis/survey.v1"
 )
 
-const VERSIONFORMATDEFAULT = "debian"
+const VERSIONFORMATDEFAULT = "semver"
 
 var (
 	versionFormat string
