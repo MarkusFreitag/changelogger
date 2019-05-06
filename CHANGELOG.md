@@ -1,8 +1,8 @@
-# For next release
+# Patch Release v0.2.4 (2019-05-06)
   * **Markus Freitag**
     * Set default versioning to semver
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.2.3 (2019-02-12)
   * **Markus Freitag**
