@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * Set default versioning to semver
+
+*Not released yet*
+
 # Patch Release v0.2.3 (2019-02-12)
   * **Markus Freitag**
     * Enable syntax highlighting in editor
