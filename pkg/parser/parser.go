@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"sort"
 	"strings"
 	"time"
 
@@ -49,7 +50,7 @@ func (c Changes) FormatByAuthor(author string, indent int) string {
 	if changes, ok := c[author]; ok {
 		output += "\n" + stringutil.IncrIndent(changes, indent)
 	}
-	return output
+	return output + "\n"
 }
 
 func (c Changes) Format(indent int) string {
@@ -90,6 +91,15 @@ func NewRelease() *Release {
 		Footer:  "*Not released yet*",
 		Changes: make(Changes),
 	}
+}
+
+func (r *Release) SortedAuthors() []string {
+	authors := make([]string, 0)
+	for author := range r.Changes {
+		authors = append(authors, author)
+	}
+	sort.Strings(authors)
+	return authors
 }
 
 func (r *Release) MarshalJSON() ([]byte, error) {
@@ -146,7 +156,9 @@ func (r *Release) GenerateFooter() {
 func (r *Release) Show() string {
 	parts := make([]string, 3)
 	parts[0] = r.Header
-	parts[1] = r.Changes.Format(2) + "\n"
+	for _, author := range r.SortedAuthors() {
+		parts[1] += r.Changes.FormatByAuthor(author, 2)
+	}
 	parts[2] = r.Footer
 	return strings.Join(parts, "\n") + "\n"
 }
