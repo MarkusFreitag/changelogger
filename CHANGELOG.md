@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * Sort authors within a release
+
+*Not released yet*
+
 # Patch Release v0.2.4 (2019-05-06)
   * **Markus Freitag**
     * Set default versioning to semver
