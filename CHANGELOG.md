@@ -1,8 +1,8 @@
-# For next release
+# Patch Release v0.2.5 (2019-07-24)
   * **Markus Freitag**
     * Sort authors within a release
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.2.4 (2019-05-06)
   * **Markus Freitag**
