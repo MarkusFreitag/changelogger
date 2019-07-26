@@ -1,11 +1,11 @@
-# For next release
+# Minor Release v0.3.0 (2019-07-26)
   * **Markus Freitag**
     * Add CLI command `debian`
       * `debian dummy` creates a changelog file containing only the latest
         release with the hint to check CHANGELOG.md
       * `debian full` generates a debian formated changelog out of CHANGELOG.md
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.2.5 (2019-07-24)
   * **Markus Freitag**
