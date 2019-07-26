@@ -171,9 +171,9 @@ var debianFullCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(debianCmd)
-	debianCmd.PersistentFlags().StringVar(&changelogPath, "output-file", "debian/changelog", "")
-	debianCmd.PersistentFlags().StringVar(&templatePath, "template-file", "debian/changelog.template", "")
-	debianCmd.PersistentFlags().BoolVar(&force, "force", false, "Overwrite an existing file")
+	debianCmd.PersistentFlags().StringVar(&changelogPath, "output-file", "debian/changelog", "debian changelog path")
+	debianCmd.PersistentFlags().StringVar(&templatePath, "template-file", "debian/changelog.template", "template path")
+	debianCmd.PersistentFlags().BoolVar(&force, "force", false, "overwrite an existing file")
 
 	debianCmd.AddCommand(debianDummyCmd)
 	debianCmd.AddCommand(debianFullCmd)
