@@ -54,14 +54,20 @@ func (c Changes) FormatByAuthor(author string, indent int) string {
 }
 
 func (c Changes) Format(indent int) string {
-	var index int
-	parts := make([]string, len(c))
-	for author, changes := range c {
-		parts[index] = stringutil.IncrIndent(fmt.Sprintf("* **%s**", author), indent)
-		parts[index] += "\n" + stringutil.IncrIndent(changes, indent*indent)
-		index++
+	var changes string
+	for _, author := range c.SortedAuthors() {
+		changes += c.FormatByAuthor(author, 2)
 	}
-	return strings.Join(parts, "\n")
+	return changes
+}
+
+func (c Changes) SortedAuthors() []string {
+	authors := make([]string, 0)
+	for author := range c {
+		authors = append(authors, author)
+	}
+	sort.Strings(authors)
+	return authors
 }
 
 type Releases []*Release
@@ -91,15 +97,6 @@ func NewRelease() *Release {
 		Footer:  "*Not released yet*",
 		Changes: make(Changes),
 	}
-}
-
-func (r *Release) SortedAuthors() []string {
-	authors := make([]string, 0)
-	for author := range r.Changes {
-		authors = append(authors, author)
-	}
-	sort.Strings(authors)
-	return authors
 }
 
 func (r *Release) MarshalJSON() ([]byte, error) {
@@ -156,9 +153,7 @@ func (r *Release) GenerateFooter() {
 func (r *Release) Show() string {
 	parts := make([]string, 3)
 	parts[0] = r.Header
-	for _, author := range r.SortedAuthors() {
-		parts[1] += r.Changes.FormatByAuthor(author, 2)
-	}
+	parts[1] = r.Changes.Format(2)
 	parts[2] = r.Footer
 	return strings.Join(parts, "\n") + "\n"
 }
