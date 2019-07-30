@@ -116,7 +116,7 @@ var debianDummyCmd = &cobra.Command{
 
 		data := templateData{
 			BinaryName: binaryName,
-			Version:    rel.Version.Original(),
+			Version:    strings.TrimPrefix(rel.Version.Original(), "v"),
 			AuthorName: rel.By.Name,
 			AuthorMail: rel.By.Email,
 			Text:       "* See CHANGELOG.md",
@@ -151,7 +151,7 @@ var debianFullCmd = &cobra.Command{
 
 			data := templateData{
 				BinaryName: binaryName,
-				Version:    rel.Version.Original(),
+				Version:    strings.TrimPrefix(rel.Version.Original(), "v"),
 				AuthorName: rel.By.Name,
 				AuthorMail: rel.By.Email,
 				Text:       text,
