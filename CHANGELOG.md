@@ -1,8 +1,8 @@
-# For next release
+# Patch Release v0.3.1 (2019-07-30)
   * **Markus Freitag**
     * Remove 'v' from version string when generating debian changelog
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Minor Release v0.3.0 (2019-07-26)
   * **Markus Freitag**
