@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * Remove 'v' from version string when generating debian changelog
+
+*Not released yet*
+
 # Minor Release v0.3.0 (2019-07-26)
   * **Markus Freitag**
     * Add CLI command `debian`
