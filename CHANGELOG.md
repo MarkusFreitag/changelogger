@@ -1,8 +1,8 @@
-# For next release
+# Patch Release v0.3.2 (2020-02-12)
   * **Markus Freitag**
     * **bugfix** Fix early return when generating debian changelog
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.3.1 (2019-07-30)
   * **Markus Freitag**
