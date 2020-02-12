@@ -93,7 +93,10 @@ var debianCmd = &cobra.Command{
 	},
 	PersistentPostRunE: func(cmd *cobra.Command, args []string) error {
 		if _, err := os.Stat(templatePath); err == nil {
-			return os.Remove(templatePath)
+			err := os.Remove(templatePath)
+			if err != nil {
+				return err
+			}
 		}
 		return ioutil.WriteFile(changelogPath, out.Bytes(), 0644)
 	},
