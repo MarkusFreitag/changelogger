@@ -1,8 +1,8 @@
-# For next release
+# Patch Release v0.3.3 (2020-02-12)
   * **Markus Freitag**
     * Fix goreleaser config
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.3.2 (2020-02-12)
   * **Markus Freitag**
