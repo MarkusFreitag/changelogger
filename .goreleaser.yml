@@ -13,8 +13,8 @@ build:
   env:
     - CGO_ENABLED=0
 
-archive:
-  name_template: "{{.Binary}}_{{.Os}}_{{.Arch}}"
+archives:
+  - name_template: "{{.Binary}}_{{.Os}}_{{.Arch}}"
 
 release:
   draft: true
@@ -25,13 +25,13 @@ snapshot:
 checksum:
   name_template: "changelogger_checksums.txt"
 
-nfpm:
-  vendor: Changelogger
-  homepage: https://github.com/MarkusFreitag/changelogger
-  maintainer: Markus Freitag <fmarkus@mailbox.org> 
-  description: Create and update changelog files interactively
-  license: MIT
-  formats:
-    - deb
-    - rpm
-  name_template: "{{.ProjectName}}_{{.Os}}_{{.Arch}}"
+nfpms:
+  - vendor: Changelogger
+    homepage: https://github.com/MarkusFreitag/changelogger
+    maintainer: Markus Freitag <fmarkus@mailbox.org> 
+    description: Create and update changelog files interactively
+    license: MIT
+    formats:
+      - deb
+      - rpm
+    file_name_template: "{{.ProjectName}}_{{.Os}}_{{.Arch}}"
