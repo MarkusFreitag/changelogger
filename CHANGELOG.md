@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * Fix goreleaser config
+
+*Not released yet*
+
 # Patch Release v0.3.2 (2020-02-12)
   * **Markus Freitag**
     * **bugfix** Fix early return when generating debian changelog
