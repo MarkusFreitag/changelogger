@@ -34,12 +34,14 @@ var prettyPrint bool
 var jsonCmd = &cobra.Command{
 	Use:   "json",
 	Short: "Print version information",
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		if _, err := os.Stat(changelogFile); os.IsNotExist(err) {
-			handleError(fmt.Errorf("%s does not exist", changelogFile))
+			return fmt.Errorf("%s does not exist", changelogFile)
 		}
 		rels, err := parser.ReadFile(changelogFile)
-		handleError(err)
+		if err != nil {
+			return err
+		}
 		f := pj.NewFormatter()
 		if !prettyPrint {
 			f.DisabledColor = true
@@ -48,6 +50,7 @@ var jsonCmd = &cobra.Command{
 		}
 		s, _ := f.Marshal(rels)
 		fmt.Println(string(s))
+		return nil
 	},
 }
 

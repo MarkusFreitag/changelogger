@@ -60,12 +60,14 @@ func updateChecker() (*selfupdate.Release, error) {
 var updateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Update to the latest version",
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		latest, err := updateChecker()
-		handleError(err)
+		if err != nil {
+			return err
+		}
 		if latest == nil {
 			fmt.Println("Already up to date")
-			return
+			return nil
 		}
 
 		if !force {
@@ -74,17 +76,24 @@ var updateCmd = &cobra.Command{
 				Message: fmt.Sprintf("%s => %s Continue?", BuildVersion, latest.Version.String()),
 			}
 			err = survey.AskOne(prompt, &confirm, nil)
-			handleError(err)
+			if err != nil {
+				return err
+			}
 			if !confirm {
-				return
+				return nil
 			}
 		}
 
 		exe, err := os.Executable()
-		handleError(err)
+		if err != nil {
+			return err
+		}
 		err = selfupdate.UpdateTo(latest.AssetURL, exe)
-		handleError(err)
+		if err != nil {
+			return err
+		}
 		fmt.Println("Successfully updated to version", latest.Version.String())
+		return nil
 	},
 }
 

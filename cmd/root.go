@@ -36,22 +36,19 @@ import (
 
 var changelogFile string
 
-func handleError(err error) {
-	if err != nil {
-		fmt.Printf("err: %s\n", err.Error())
-		os.Exit(1)
-	}
-}
-
 var rootCmd = &cobra.Command{
 	Use:   "changelogger",
 	Short: "Create and update changelogs with ease",
-	PersistentPreRun: func(cmd *cobra.Command, args []string) {
+	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		if val, ok := os.LookupEnv("CHANGELOGGER_MIN_VERSION"); ok {
 			minVersion, err := semver.NewVersion(val)
-			handleError(err)
+			if err != nil {
+				return err
+			}
 			bVersion, err := semver.NewVersion(BuildVersion)
-			handleError(err)
+			if err != nil {
+				return err
+			}
 			if bVersion.LessThan(minVersion) {
 				fmt.Printf("Your current version: %s\n", bVersion.String())
 				fmt.Printf("Required version: %s\n", minVersion.String())
@@ -59,17 +56,22 @@ var rootCmd = &cobra.Command{
 				os.Exit(1)
 			}
 		}
+		return nil
 	},
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		var err error
 		rels := make(parser.Releases, 0)
 		if _, err := os.Stat(changelogFile); err == nil {
 			rels, err = parser.ReadFile(changelogFile)
-			handleError(err)
+			if err != nil {
+				return err
+			}
 		}
 
 		gitAuthor, err := gitconfig.GetGitAuthor()
-		handleError(err)
+		if err != nil {
+			return err
+		}
 
 		if len(rels) == 0 {
 			rels = append(rels, parser.NewRelease())
@@ -87,12 +89,14 @@ var rootCmd = &cobra.Command{
 		userInput := existingChanges
 
 		err = editor.Open(&userInput)
-		handleError(err)
+		if err != nil {
+			return err
+		}
 		userInput = strings.TrimSpace(userInput)
 
 		if userInput == existingChanges {
 			fmt.Println("exit without writing")
-			return
+			return nil
 		}
 
 		userInput = strings.TrimPrefix(userInput, existingChanges)
@@ -115,11 +119,13 @@ var rootCmd = &cobra.Command{
 		}
 
 		file, err := os.Create(changelogFile)
-		handleError(err)
+		if err != nil {
+			return err
+		}
 		defer file.Close()
 
 		_, err = io.Copy(file, strings.NewReader(strings.Join(blocks, "\n")))
-		handleError(err)
+		return err
 	},
 }
 

@@ -3,6 +3,7 @@
     * Drop auto update checker
     * Prefix changelog entry with an asterisk if missing
     * Remove empty trailing lines
+    * Unify error handling
 
 *Not released yet*
 
