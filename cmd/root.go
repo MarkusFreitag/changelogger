@@ -25,7 +25,6 @@ import (
 	"io"
 	"os"
 	"strings"
-	"time"
 
 	"github.com/MarkusFreitag/changelogger/pkg/editor"
 	"github.com/MarkusFreitag/changelogger/pkg/gitconfig"
