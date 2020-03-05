@@ -1,6 +1,8 @@
 # For next release
   * **Markus Freitag**
     * Drop auto update checker
+    * Prefix changelog entry with an asterisk if missing
+    * Remove empty trailing lines
 
 *Not released yet*
 

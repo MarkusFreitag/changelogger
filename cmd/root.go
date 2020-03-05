@@ -89,15 +89,20 @@ var rootCmd = &cobra.Command{
 
 		err = editor.Open(&userInput)
 		handleError(err)
-		userInput = strings.TrimSuffix(userInput, "\n")
+		userInput = strings.TrimSpace(userInput)
 
 		if userInput == existingChanges {
 			fmt.Println("exit without writing")
 			return
 		}
 
-		userInput = strings.TrimPrefix(userInput, existingChanges+"\n")
+		userInput = strings.TrimPrefix(userInput, existingChanges)
+		userInput = strings.TrimSpace(userInput)
 		userInput = stringutil.DecrIndent(userInput, stringutil.IndentLvl(userInput))
+		if !strings.HasPrefix(userInput, "*") {
+			userInput = "* " + userInput
+			userInput = strings.ReplaceAll(userInput, "\n", "\n* ")
+		}
 
 		if block := rels[0].Changes[gitAuthor.Name]; block != "" {
 			rels[0].Changes[gitAuthor.Name] = strings.Join([]string{block, userInput}, "\n")
