@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * Drop auto update checker
+
+*Not released yet*
+
 # Patch Release v0.3.3 (2020-02-12)
   * **Markus Freitag**
     * Fix goreleaser config
