@@ -1,11 +1,11 @@
-# For next release
+# Minor Release v0.4.0 (2020-03-05)
   * **Markus Freitag**
     * Drop auto update checker
     * Prefix changelog entry with an asterisk if missing
     * Remove empty trailing lines
     * Unify error handling
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.3.3 (2020-02-12)
   * **Markus Freitag**
