@@ -51,12 +51,14 @@ var releaseCmd = &cobra.Command{
 var releaseLastCmd = &cobra.Command{
 	Use:   "last",
 	Short: "Show last release",
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		if _, err := os.Stat(changelogFile); os.IsNotExist(err) {
-			handleError(fmt.Errorf("%s does not exist", changelogFile))
+			return fmt.Errorf("%s does not exist", changelogFile)
 		}
 		rels, err := parser.ReadFile(changelogFile)
-		handleError(err)
+		if err != nil {
+			return err
+		}
 		var lastRelease *parser.Release
 		for _, rel := range rels {
 			if rel.Released {
@@ -66,13 +68,14 @@ var releaseLastCmd = &cobra.Command{
 		}
 
 		if lastRelease == nil {
-			handleError(fmt.Errorf("no released version available"))
+			return fmt.Errorf("no released version available")
 		}
 		if versionOnly {
 			fmt.Printf("v%s\n", lastRelease.Version.String())
-			return
+			return nil
 		}
 		fmt.Println(lastRelease.Show())
+		return nil
 	},
 }
 
@@ -86,24 +89,30 @@ var releaseNewCmd = &cobra.Command{
 			}
 		}
 	},
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		if _, err := os.Stat(changelogFile); os.IsNotExist(err) {
-			handleError(fmt.Errorf("%s does not exist", changelogFile))
+			return fmt.Errorf("%s does not exist", changelogFile)
 		}
 
 		gitAuthor, err := gitconfig.GetGitAuthor()
-		handleError(err)
+		if err != nil {
+			return err
+		}
 
 		rels, err := parser.ReadFile(changelogFile)
-		handleError(err)
+		if err != nil {
+			return err
+		}
 
 		if len(rels) == 0 || rels[0].Released {
-			handleError(fmt.Errorf("no unreleased version available"))
+			return fmt.Errorf("no unreleased version available")
 		}
 		var lastVersion *semver.Version
 		if len(rels) == 1 {
 			lastVersion, err = semver.NewVersion("v0.0.0-1")
-			handleError(err)
+			if err != nil {
+				return err
+			}
 		} else {
 			lastVersion = rels[1].Version
 		}
@@ -117,33 +126,45 @@ var releaseNewCmd = &cobra.Command{
 			prompt.Options = []string{"patch", "minor", "major"}
 		}
 		err = survey.AskOne(prompt, &bump, nil)
-		handleError(err)
+		if err != nil {
+			return err
+		}
 
 		var newVersion semver.Version
 		switch bump {
 		case "debian":
 			debian, err := strconv.Atoi(getFirstNumber(lastVersion.Prerelease()))
-			handleError(err)
+			if err != nil {
+				return err
+			}
 			newVersion, err = lastVersion.SetPrerelease(strconv.Itoa(debian + 1))
-			handleError(err)
+			if err != nil {
+				return err
+			}
 		case "patch":
 			newVersion = lastVersion.IncPatch()
 			if versionFormat == "debian" {
 				newVersion = newVersion.IncPatch()
 				newVersion, err = newVersion.SetPrerelease("1")
-				handleError(err)
+				if err != nil {
+					return err
+				}
 			}
 		case "minor":
 			newVersion = lastVersion.IncMinor()
 			if versionFormat == "debian" {
 				newVersion, err = newVersion.SetPrerelease("1")
-				handleError(err)
+				if err != nil {
+					return err
+				}
 			}
 		case "major":
 			newVersion = lastVersion.IncMajor()
 			if versionFormat == "debian" {
 				newVersion, err = newVersion.SetPrerelease("1")
-				handleError(err)
+				if err != nil {
+					return err
+				}
 			}
 		}
 
@@ -159,12 +180,17 @@ var releaseNewCmd = &cobra.Command{
 		}
 
 		file, err := os.Create(changelogFile)
-		handleError(err)
+		if err != nil {
+			return err
+		}
 		defer file.Close()
 
 		_, err = io.Copy(file, strings.NewReader(strings.Join(blocks, "\n")))
-		handleError(err)
+		if err != nil {
+			return err
+		}
 		fmt.Printf("Released %s version %s (pre: %s)\n", bump, newVersion.String(), lastVersion.String())
+		return nil
 	},
 }
 
