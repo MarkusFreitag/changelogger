@@ -1,8 +1,8 @@
-# For next release
+# Patch Release v0.4.1 (2020-03-26)
   * **Markus Freitag**
     * Add missing whitespaces to debian changelog template
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Minor Release v0.4.0 (2020-03-05)
   * **Markus Freitag**
