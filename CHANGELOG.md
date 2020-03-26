@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * Add missing whitespaces to debian changelog template
+
+*Not released yet*
+
 # Minor Release v0.4.0 (2020-03-05)
   * **Markus Freitag**
     * Drop auto update checker

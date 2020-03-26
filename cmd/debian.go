@@ -43,9 +43,10 @@ var (
 	out             = bytes.NewBufferString("")
 	defaultTemplate = `{{.BinaryName}} ({{.Version}}) UNSTABLE; urgency=medium
 
-{{.Text}}
+  {{.Text}}
 
  -- {{.AuthorName}} <{{.AuthorMail}}>  {{.Date}}
+
 `
 )
 
