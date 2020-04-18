@@ -1,8 +1,8 @@
-# For next release
+# Patch Release v0.4.2 (2020-04-18)
   * **Markus Freitag**
     * Add binary builds for darwin
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.4.1 (2020-03-26)
   * **Markus Freitag**
