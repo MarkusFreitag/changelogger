@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * Move darwin from goarch to goos
+
+*Not released yet*
+
 # Patch Release v0.4.2 (2020-04-18)
   * **Markus Freitag**
     * Add binary builds for darwin

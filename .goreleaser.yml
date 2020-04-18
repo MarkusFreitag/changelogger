@@ -8,9 +8,9 @@ build:
       -X github.com/MarkusFreitag/changelogger/cmd.BuildDate={{.Date}}
   goos:
     - linux
+    - darwin
   goarch:
     - amd64
-    - darwin
   env:
     - CGO_ENABLED=0
 
