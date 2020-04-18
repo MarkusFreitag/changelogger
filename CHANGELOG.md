@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * Add binary builds for darwin
+
+*Not released yet*
+
 # Patch Release v0.4.1 (2020-03-26)
   * **Markus Freitag**
     * Add missing whitespaces to debian changelog template
