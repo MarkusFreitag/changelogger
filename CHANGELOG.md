@@ -1,8 +1,8 @@
-# For next release
+# Patch Release v0.4.3 (2020-04-18)
   * **Markus Freitag**
     * Move darwin from goarch to goos
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.4.2 (2020-04-18)
   * **Markus Freitag**
