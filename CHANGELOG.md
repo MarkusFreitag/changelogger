@@ -1,8 +1,8 @@
-# For next release
+# Minor Release v0.5.0 (2020-10-19)
   * **Markus Freitag**
     * - cmd/debian: Add version and date flag for experimental releases
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.4.3 (2020-04-18)
   * **Markus Freitag**
