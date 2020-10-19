@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * - cmd/debian: Add version and date flag for experimental releases
+
+*Not released yet*
+
 # Patch Release v0.4.3 (2020-04-18)
   * **Markus Freitag**
     * Move darwin from goarch to goos

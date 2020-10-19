@@ -38,6 +38,8 @@ var (
 	changelogPath   string
 	templatePath    string
 	binaryName      string
+	customVersion   string
+	customDate      string
 	temp            *template.Template
 	releases        parser.Releases
 	out             = bytes.NewBufferString("")
@@ -120,11 +122,19 @@ var debianDummyCmd = &cobra.Command{
 
 		data := templateData{
 			BinaryName: binaryName,
-			Version:    strings.TrimPrefix(rel.Version.Original(), "v"),
 			AuthorName: rel.By.Name,
 			AuthorMail: rel.By.Email,
 			Text:       "* See CHANGELOG.md",
-			Date:       rel.Date.Format("Mon, 02 Jan 2006 15:04:05 -0700"),
+		}
+		if customVersion != "" {
+			data.Version = customVersion
+		} else {
+			data.Version = strings.TrimPrefix(rel.Version.Original(), "v")
+		}
+		if customDate != "" {
+			data.Date = customDate
+		} else {
+			data.Date = rel.Date.Format("Mon, 02 Jan 2006 15:04:05 -0700")
 		}
 
 		return temp.ExecuteTemplate(out, "changelog", data)
@@ -155,11 +165,19 @@ var debianFullCmd = &cobra.Command{
 
 			data := templateData{
 				BinaryName: binaryName,
-				Version:    strings.TrimPrefix(rel.Version.Original(), "v"),
 				AuthorName: rel.By.Name,
 				AuthorMail: rel.By.Email,
 				Text:       text,
-				Date:       rel.Date.Format("Mon, 02 Jan 2006 15:04:05 -0700"),
+			}
+			if customVersion != "" {
+				data.Version = customVersion
+			} else {
+				data.Version = strings.TrimPrefix(rel.Version.Original(), "v")
+			}
+			if customDate != "" {
+				data.Date = customDate
+			} else {
+				data.Date = rel.Date.Format("Mon, 02 Jan 2006 15:04:05 -0700")
 			}
 
 			err := temp.ExecuteTemplate(out, "changelog", data)
@@ -178,6 +196,8 @@ func init() {
 	debianCmd.PersistentFlags().StringVar(&changelogPath, "output-file", "debian/changelog", "debian changelog path")
 	debianCmd.PersistentFlags().StringVar(&templatePath, "template-file", "debian/changelog.template", "template path")
 	debianCmd.PersistentFlags().BoolVar(&force, "force", false, "overwrite an existing file")
+	debianCmd.PersistentFlags().StringVar(&customVersion, "version", "", "specify custom version for experimental releases")
+	debianCmd.PersistentFlags().StringVar(&customDate, "date", "", "specify custom data for experimental releases")
 
 	debianCmd.AddCommand(debianDummyCmd)
 	debianCmd.AddCommand(debianFullCmd)
