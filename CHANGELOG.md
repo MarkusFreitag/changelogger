@@ -1,6 +1,7 @@
 # For next release
   * **Markus Freitag**
     * add arm64 builds
+    * update module dependencies
 
 *Not released yet*
 
