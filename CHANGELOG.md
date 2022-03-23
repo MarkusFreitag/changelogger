@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * add arm64 builds
+
+*Not released yet*
+
 # Minor Release v0.5.0 (2020-10-19)
   * **Markus Freitag**
     * - cmd/debian: Add version and date flag for experimental releases
