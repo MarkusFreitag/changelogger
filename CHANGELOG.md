@@ -1,9 +1,9 @@
-# For next release
+# Patch Release v0.5.1 (2022-03-23)
   * **Markus Freitag**
     * add arm64 builds
     * update module dependencies
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Minor Release v0.5.0 (2020-10-19)
   * **Markus Freitag**
