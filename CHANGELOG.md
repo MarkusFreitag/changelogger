@@ -1,6 +1,7 @@
 # For next release
   * **Tom Siewert**
     * ci: Migrate to GitHub Workflows
+    * install.sh: Update to latest to support arm64 properly
 
 *Not released yet*
 
