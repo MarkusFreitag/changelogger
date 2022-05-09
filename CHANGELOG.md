@@ -1,3 +1,9 @@
+# For next release
+  * **Tom Siewert**
+    * ci: Migrate to GitHub Workflows
+
+*Not released yet*
+
 # Patch Release v0.5.1 (2022-03-23)
   * **Markus Freitag**
     * add arm64 builds
