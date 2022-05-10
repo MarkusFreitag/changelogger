@@ -1,3 +1,10 @@
+# For next release
+  * **Tom Siewert**
+    * ci: Migrate to GitHub Workflows
+    * install.sh: Update to latest to support arm64 properly
+
+*Not released yet*
+
 # Patch Release v0.5.1 (2022-03-23)
   * **Markus Freitag**
     * add arm64 builds
