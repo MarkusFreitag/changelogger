@@ -1,9 +1,9 @@
-# For next release
+# Patch Release v0.5.2 (2022-05-10)
   * **Tom Siewert**
     * ci: Migrate to GitHub Workflows
     * install.sh: Update to latest to support arm64 properly
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.5.1 (2022-03-23)
   * **Markus Freitag**
