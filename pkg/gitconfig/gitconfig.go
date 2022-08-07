@@ -12,7 +12,7 @@ import (
 	"github.com/muja/goconfig"
 )
 
-var files = []string{".git/config", "~/.gitconfig", "/etc/gitconfig"}
+var files = []string{".git/config", "~/.gitconfig", "/etc/gitconfig", "~/.config/git/config"}
 
 func GetGitAuthor() (*parser.Author, error) {
 	user, err := user.Current()

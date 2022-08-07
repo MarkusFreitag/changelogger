@@ -1,3 +1,9 @@
+# For next release
+  * **Tom Siewert**
+    * pkg/gitconfig: Add ~/.config/git/config to possible files
+
+*Not released yet*
+
 # Patch Release v0.5.2 (2022-05-10)
   * **Tom Siewert**
     * ci: Migrate to GitHub Workflows
