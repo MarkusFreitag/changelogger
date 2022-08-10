@@ -1,6 +1,7 @@
 # For next release
   * **Tom Siewert**
     * pkg/gitconfig: Add ~/.config/git/config to possible files
+    * ci: Use official golangci-lint action
 
 *Not released yet*
 

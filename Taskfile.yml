@@ -82,5 +82,4 @@ tasks:
   ci:
     desc: Run ci tasks
     cmds:
-      - task: lint
       - task: test
