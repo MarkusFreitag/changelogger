@@ -1,9 +1,9 @@
-# For next release
+# Patch Release v0.5.3 (2022-08-23)
   * **Tom Siewert**
     * pkg/gitconfig: Add ~/.config/git/config to possible files
     * ci: Use official golangci-lint action
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.5.2 (2022-05-10)
   * **Tom Siewert**
