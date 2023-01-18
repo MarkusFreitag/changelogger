@@ -1,8 +1,8 @@
-# For next release
+# Minor Release v0.6.0 (2023-01-18)
   * **Markus Freitag**
     * pkg/gitconfig: replace character-based with ini config parser
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Patch Release v0.5.3 (2022-08-23)
   * **Tom Siewert**
