@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * pkg/gitconfig: replace character-based with ini config parser
+
+*Not released yet*
+
 # Patch Release v0.5.3 (2022-08-23)
   * **Tom Siewert**
     * pkg/gitconfig: Add ~/.config/git/config to possible files
