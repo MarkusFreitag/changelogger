@@ -1,3 +1,9 @@
+# For next release
+  * **Tom Siewert**
+    * debian: lowercase unstable
+
+*Not released yet*
+
 # Minor Release v0.6.0 (2023-01-18)
   * **Markus Freitag**
     * pkg/gitconfig: replace character-based with ini config parser

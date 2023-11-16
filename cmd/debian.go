@@ -43,7 +43,7 @@ var (
 	temp            *template.Template
 	releases        parser.Releases
 	out             = bytes.NewBufferString("")
-	defaultTemplate = `{{.BinaryName}} ({{.Version}}) UNSTABLE; urgency=medium
+	defaultTemplate = `{{.BinaryName}} ({{.Version}}) unstable; urgency=medium
 
   {{.Text}}
 
