@@ -1,8 +1,8 @@
-# For next release
+# Patch Release v0.6.1 (2023-11-23)
   * **Tom Siewert**
     * debian: lowercase unstable
 
-*Not released yet*
+*Released by Markus Freitag <fmarkus@mailbox.org>*
 
 # Minor Release v0.6.0 (2023-01-18)
   * **Markus Freitag**
