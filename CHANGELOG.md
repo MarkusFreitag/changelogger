@@ -1,3 +1,9 @@
+# For next release
+  * **Markus Freitag**
+    * pkg/gitconfig: replace ini config parser with git shell exec
+
+*Not released yet*
+
 # Patch Release v0.6.1 (2023-11-23)
   * **Tom Siewert**
     * debian: lowercase unstable

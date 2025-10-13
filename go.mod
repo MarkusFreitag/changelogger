@@ -10,7 +10,6 @@ require (
 	github.com/stretchr/testify v1.5.1
 	golang.org/x/text v0.30.0
 	gopkg.in/AlecAivazis/survey.v1 v1.8.8
-	gopkg.in/ini.v1 v1.67.0
 )
 
 require (

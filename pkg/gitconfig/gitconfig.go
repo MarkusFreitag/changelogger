@@ -1,50 +1,53 @@
 package gitconfig // import "github.com/MarkusFreitag/changelogger/pkg/gitconfig"
 
 import (
+	"bytes"
 	"errors"
-	"os"
-	"os/user"
-	"path/filepath"
+	"fmt"
+	"io"
+	"os/exec"
 	"strings"
+	"syscall"
 
 	"github.com/MarkusFreitag/changelogger/pkg/parser"
-	"gopkg.in/ini.v1"
 )
 
-var files = []string{".git/config", "~/.gitconfig", "/etc/gitconfig", "~/.config/git/config"}
+func fetchConfigAttribute(key string) (string, error) {
+	var stdout bytes.Buffer
+	cmd := exec.Command("git", "config", "--get", "--null", key)
+	cmd.Stdout = &stdout
+	cmd.Stderr = io.Discard
+
+	err := cmd.Run()
+	if exitError, ok := err.(*exec.ExitError); ok {
+		if waitStatus, ok := exitError.Sys().(syscall.WaitStatus); ok {
+			if waitStatus.ExitStatus() == 1 {
+				return "", fmt.Errorf("failed to get git config key %q", key)
+			}
+		}
+		return "", err
+	}
+
+	return strings.TrimRight(stdout.String(), "\000"), nil
+}
 
 func GetGitAuthor() (*parser.Author, error) {
-	user, err := user.Current()
+	var author parser.Author
+	var err error
+
+	author.Name, err = fetchConfigAttribute("user.name")
 	if err != nil {
 		return nil, err
 	}
-	for _, file := range files {
-		if strings.HasPrefix(file, "~") {
-			file = strings.TrimPrefix(file, "~")
-			file = filepath.Join(user.HomeDir, file)
-		}
-		if _, err := os.Stat(file); os.IsNotExist(err) {
-			continue
-		}
 
-		config, err := ini.Load(file)
-		if err != nil {
-			return nil, err
-		}
-
-		var author parser.Author
-		if section := config.Section("user"); section != nil {
-			if key := section.Key("name"); key != nil {
-				author.Name = key.String()
-			}
-			if key := section.Key("email"); key != nil {
-				author.Email = key.String()
-			}
-		}
-
-		if author.Name != "" && author.Email != "" {
-			return &author, nil
-		}
+	author.Email, err = fetchConfigAttribute("user.email")
+	if err != nil {
+		return nil, err
 	}
+
+	if author.Name != "" && author.Email != "" {
+		return &author, nil
+	}
+
 	return nil, errors.New("couldn't find an author in any config")
 }
