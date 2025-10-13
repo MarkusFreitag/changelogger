@@ -12,6 +12,8 @@ import (
 
 	"github.com/MarkusFreitag/changelogger/pkg/stringutil"
 	"github.com/Masterminds/semver"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 var (
@@ -140,7 +142,12 @@ func (r *Release) GenerateHeader(bump string) {
 	if r.Version == nil {
 		r.Header = "# For next Release"
 	}
-	r.Header = fmt.Sprintf("# %s Release %s (%s)", strings.Title(bump), r.Version.Original(), r.Date.Format("2006-01-02"))
+	r.Header = fmt.Sprintf(
+		"# %s Release %s (%s)",
+		cases.Title(language.English).String(bump),
+		r.Version.Original(),
+		r.Date.Format("2006-01-02"),
+	)
 }
 
 func (r *Release) GenerateFooter() {
@@ -240,7 +247,7 @@ func ReadFile(filename string) (Releases, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer file.Close()
+	defer file.Close() //nolint:errcheck
 
 	releases := make(Releases, 0)
 	scanner := bufio.NewScanner(file)

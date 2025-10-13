@@ -24,7 +24,6 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"strings"
 	"text/template"
@@ -54,7 +53,7 @@ var (
 
 func loadTemplate() (*template.Template, error) {
 	if _, err := os.Stat(templatePath); err == nil {
-		customTemplate, err := ioutil.ReadFile(templatePath)
+		customTemplate, err := os.ReadFile(templatePath)
 		if err != nil {
 			return nil, err
 		}
@@ -101,7 +100,7 @@ var debianCmd = &cobra.Command{
 				return err
 			}
 		}
-		return ioutil.WriteFile(changelogPath, out.Bytes(), 0644)
+		return os.WriteFile(changelogPath, out.Bytes(), 0644)
 	},
 }
 

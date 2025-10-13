@@ -2,7 +2,6 @@ package editor
 
 import (
 	"errors"
-	"io/ioutil"
 	"os"
 	"os/exec"
 
@@ -21,11 +20,11 @@ func Open(initialValue *string) error {
 		return errors.New("set EDITOR or VISUAL variable")
 	}
 
-	file, err := ioutil.TempFile("", "changelogger*.md")
+	file, err := os.CreateTemp("", "changelogger*.md")
 	if err != nil {
 		return err
 	}
-	defer os.Remove(file.Name())
+	defer os.Remove(file.Name()) //nolint:errcheck
 
 	if _, err := file.WriteString(*initialValue); err != nil {
 		return err
@@ -49,7 +48,7 @@ func Open(initialValue *string) error {
 		return err
 	}
 
-	raw, err := ioutil.ReadFile(file.Name())
+	raw, err := os.ReadFile(file.Name())
 	if err != nil {
 		return err
 	}

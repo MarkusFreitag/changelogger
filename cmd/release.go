@@ -183,7 +183,7 @@ var releaseNewCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		defer file.Close()
+		defer file.Close() //nolint:errcheck
 
 		_, err = io.Copy(file, strings.NewReader(strings.Join(blocks, "\n")))
 		if err != nil {

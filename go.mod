@@ -8,6 +8,7 @@ require (
 	github.com/rhysd/go-github-selfupdate v1.2.3
 	github.com/spf13/cobra v1.10.1
 	github.com/stretchr/testify v1.5.1
+	golang.org/x/text v0.30.0
 	gopkg.in/AlecAivazis/survey.v1 v1.8.8
 	gopkg.in/ini.v1 v1.67.0
 )
