@@ -11,6 +11,12 @@ When you using it, every 24h, it checks whether new updates are available. If so
 changelogger update
 ```
 
+Alternatively one can build it from source.
+Use the `Taskfile.yml` to ensure the binary is built with all correct flags:
+```bash
+go-task build
+```
+
 ## Usage
 
 ### Add a new entry

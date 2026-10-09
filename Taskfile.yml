@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 output: 'prefixed'
 
 vars:
@@ -49,11 +49,11 @@ tasks:
   changelog:
     desc: Add a new changelog entry
     cmds:
-      - ish: changelogger
+      - cmd: changelogger
   release:
     desc: Create a new release
     cmds:
-      - ish: changelogger release new
+      - cmd: changelogger release new
         ignore_error: yes
       - git add CHANGELOG.md
       - git commit -m "Bump version to $(changelogger release last --version-only)" -m "$(changelogger release last)"

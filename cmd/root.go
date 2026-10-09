@@ -137,5 +137,5 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringVarP(&changelogFile, "file", "f", "CHANGELOG.md", "changelog file (default is CHANGELOG.md)")
+	rootCmd.PersistentFlags().StringVarP(&changelogFile, "file", "f", "CHANGELOG.md", "changelog file")
 }
